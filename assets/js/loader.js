@@ -1,6 +1,6 @@
 // Get the current lecture name from the URL
 const lectureName = window.location.pathname.split('/').pop().replace('.html', '');
-const slidesPath = `../lectures/${lectureName}-slides.html`;
+const slidesPath = `../lectures/${lectureName}.html`; // Removed -slides suffix
 
 // Load the slides content
 fetch(slidesPath)
@@ -11,16 +11,15 @@ fetch(slidesPath)
         return response.text();
     })
     .then(html => {
-        document.getElementById('slides-container').innerHTML = html;
-        // Initialize Reveal.js with shared config
+        document.getElementById('slides').innerHTML = html;
         initializeReveal();
     })
     .catch(error => {
         console.error('Error loading slides:', error);
-        document.getElementById('slides-container').innerHTML = `
+        document.getElementById('slides').innerHTML = `
             <section>
                 <h2>Error Loading Slides</h2>
-                <p>Could not load the slides content. Please check the URL and try again.</p>
+                <p>Could not load the slides content. Please try again.</p>
                 <p><a href="../index.html">Return to Lecture List</a></p>
             </section>
         `;
