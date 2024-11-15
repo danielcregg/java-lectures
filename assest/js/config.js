@@ -1,39 +1,71 @@
 function initializeReveal() {
+    // Initialize Reveal.js
     Reveal.initialize({
+        // Display
+        width: 1200,
+        height: 800,
+        margin: 0.1,
+        minScale: 0.2,
+        maxScale: 2.0,
+        
+        // Navigation
         hash: true,
-        mouseWheel: true,
+        mouseWheel: false,
         transition: 'slide',
         transitionSpeed: 'fast',
-        plugins: [],
-        dependencies: [],
+        
+        // Controls
         controls: true,
         progress: true,
         center: true,
-        width: 1200,
-        height: 800,
-        // Add navigation controls
-        navigationMode: 'default',
-        // Enable slide numbers
-        slideNumber: true,
-        // Add menu button to return to main page
-        menu: {
-            themes: false,
-            transitions: false,
-            markers: true,
-            custom: [
-                { title: 'Home', icon: '<i class="fa fa-home"></i>', content: '<a href="../index.html">Return to Lecture List</a>' }
-            ]
-        }
-    });
+        slideNumber: 'c/t',
+        
+        // Features
+        overview: true,
+        touch: true,
+        fragments: true,
+        fragmentInURL: true,
 
-    // Initialize syntax highlighting
-    hljs.initHighlightingOnLoad();
+        // Markdown config
+        markdown: {
+            smartypants: true,
+            highlight: function (code, language) {
+                if (language) {
+                    return hljs.highlight(code, { language: language }).value;
+                }
+                return code;
+            }
+        },
+        
+        // Plugins
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+
+        // Customize keybindings
+        keyboard: {
+            // Custom key bindings
+            33: 'prev', // PgUp
+            34: 'next', // PgDown
+            72: function() { // 'h' key
+                window.location.href = '../index.html';
+            }
+        },
+    });
 
     // Initialize Mermaid
     mermaid.initialize({
         startOnLoad: true,
         theme: 'dark',
         securityLevel: 'loose',
-        themeCSS: '.node rect { fill: #1a1a1a; }'
+        themeCSS: '.node rect { fill: #1a1a1a; }',
+        flowchart: {
+            curve: 'basis',
+            padding: 20
+        }
+    });
+    
+    // Add event listeners for special features
+    Reveal.addEventListener('ready', event => {
+        // Auto-render all Mermaid diagrams
+        mermaid.init(undefined, '.mermaid');
     });
 }
