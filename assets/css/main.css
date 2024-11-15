@@ -6,6 +6,8 @@ body.home-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #1a1a1a 0%, #0d47a1 100%);
     color: white;
+    display: flex;              /* Added for better footer positioning */
+    flex-direction: column;
 }
 
 header {
@@ -18,6 +20,11 @@ header h1 {
     font-size: 2.5em;
     color: #00bfff;
     margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);  /* Added for consistency */
+}
+
+main {
+    flex: 1;                    /* Added for better footer positioning */
 }
 
 .lecture-grid {
@@ -37,26 +44,42 @@ header h1 {
     text-decoration: none;
     color: white;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);  /* Added for depth */
 }
 
 .lecture-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,191,255,0.3);
+    background: rgba(0,0,0,0.4);
 }
 
 .lecture-card h2 {
     color: #00bfff;
     margin: 0 0 1rem 0;
+    font-size: 1.5em;          /* Added specific size */
 }
 
 .lecture-card p {
     margin: 0;
     opacity: 0.8;
+    line-height: 1.5;         /* Added for readability */
 }
 
 footer {
     text-align: center;
     padding: 2rem;
     background: rgba(0,0,0,0.2);
-    margin-top: auto;
+    margin-top: auto;         /* Keeps footer at bottom */
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .lecture-grid {
+        padding: 1rem;
+        gap: 1rem;
+    }
 }

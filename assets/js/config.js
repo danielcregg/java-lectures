@@ -46,7 +46,10 @@ function initializeReveal() {
             33: 'prev', // PgUp
             34: 'next', // PgDown
             72: function() { // 'h' key
-                window.location.href = '../index.html';
+                window.location.href = '/ooc2-lectures/';  // Updated path for GitHub Pages
+            },
+            191: function() { // '?' key
+                toggleHelpOverlay();
             }
         },
 
@@ -55,55 +58,69 @@ function initializeReveal() {
             src: 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js',
             async: true,
             callback: function() {
-                // Initialize Mermaid with settings
-                mermaid.initialize({
-                    startOnLoad: true,
-                    theme: 'dark',
-                    securityLevel: 'loose',
-                    themeCSS: '.node rect { fill: #1a1a1a; }',
-                    flowchart: {
-                        curve: 'basis',
-                        padding: 20
-                    }
-                });
+                initializeMermaid();
             }
         }]
+    }).then(() => {
+        setupMermaidHandlers();
     });
 
-    // Handle Mermaid diagrams
-    if (typeof mermaid !== 'undefined') {
-        // Initial render of Mermaid diagrams
-        Reveal.addEventListener('ready', event => {
-            let diagrams = document.querySelectorAll('.mermaid');
-            diagrams.forEach(diagram => {
-                try {
-                    mermaid.init(undefined, diagram);
-                } catch (e) {
-                    console.warn('Mermaid initialization failed for a diagram:', e);
-                }
-            });
-        });
-
-        // Re-render Mermaid diagrams on slide change
-        Reveal.on('slidechanged', event => {
-            let diagrams = document.querySelectorAll('.mermaid');
-            diagrams.forEach(diagram => {
-                if (diagram.offsetParent !== null) {  // Check if diagram is visible
-                    try {
-                        mermaid.init(undefined, diagram);
-                    } catch (e) {
-                        console.warn('Mermaid re-initialization failed for a diagram:', e);
-                    }
-                }
-            });
+    // Initialize Mermaid with consistent settings
+    function initializeMermaid() {
+        mermaid.initialize({
+            startOnLoad: false,  // Changed to false to avoid double initialization
+            theme: 'dark',
+            securityLevel: 'loose',
+            themeCSS: '.node rect { fill: #1a1a1a; }',
+            flowchart: {
+                curve: 'basis',
+                padding: 20,
+                useMaxWidth: true
+            },
+            sequence: {
+                mirrorActors: false,
+                bottomMarginAdj: 10
+            }
         });
     }
 
-    // Add keyboard shortcut hint
+    // Setup Mermaid diagram handlers
+    function setupMermaidHandlers() {
+        if (typeof mermaid !== 'undefined') {
+            // Initial render
+            Reveal.addEventListener('ready', event => {
+                renderVisibleMermaidDiagrams();
+            });
+
+            // Re-render on slide change
+            Reveal.on('slidechanged', event => {
+                renderVisibleMermaidDiagrams();
+            });
+        }
+    }
+
+    // Render only visible Mermaid diagrams
+    function renderVisibleMermaidDiagrams() {
+        document.querySelectorAll('.mermaid').forEach(diagram => {
+            if (diagram.offsetParent !== null) {
+                try {
+                    // Clean up any existing rendered content
+                    const cleanText = diagram.textContent.replace(/<[^>]*>/g, '');
+                    diagram.textContent = cleanText;
+                    mermaid.init(undefined, diagram);
+                } catch (e) {
+                    console.warn('Mermaid diagram error:', e);
+                    diagram.innerHTML = `<pre class="error">Diagram rendering failed: ${e.message}</pre>`;
+                }
+            }
+        });
+    }
+
+    // Create and add help overlay
     const helpContent = document.createElement('div');
     helpContent.className = 'help-overlay';
     helpContent.innerHTML = `
-        <div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; display: none;">
+        <div class="help-content" style="display: none;">
             <h3>Keyboard Shortcuts</h3>
             <table>
                 <tr><td>→, Space</td><td>Next slide</td></tr>
@@ -111,23 +128,22 @@ function initializeReveal() {
                 <tr><td>H</td><td>Return home</td></tr>
                 <tr><td>F</td><td>Fullscreen</td></tr>
                 <tr><td>ESC, O</td><td>Slide overview</td></tr>
+                <tr><td>?</td><td>Show/hide this help</td></tr>
             </table>
         </div>
     `;
     document.body.appendChild(helpContent);
 
-    // Show help overlay on '?' key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === '?') {
-            const overlay = document.querySelector('.help-overlay div');
-            if (overlay.style.display === 'none') {
-                overlay.style.display = 'block';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 3000); // Hide after 3 seconds
-            } else {
+    // Toggle help overlay
+    function toggleHelpOverlay() {
+        const overlay = document.querySelector('.help-content');
+        if (overlay.style.display === 'none') {
+            overlay.style.display = 'block';
+            setTimeout(() => {
                 overlay.style.display = 'none';
-            }
+            }, 3000);
+        } else {
+            overlay.style.display = 'none';
         }
-    });
+    }
 }

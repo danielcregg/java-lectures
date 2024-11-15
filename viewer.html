@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Lecture</title>
+
+    <!-- Reveal.js Core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
+    
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="./assets/css/slides.css">
+</head>
+<body>
+    <!-- Home Button -->
+    <a href="/" class="home-button">🏠 Home</a>
+
+    <!-- Presentation Container -->
+    <div class="reveal">
+        <div class="slides">
+            <section 
+                data-markdown="lectures/serialization.md"
+                data-separator="^\n---\n$"
+                data-separator-vertical="^\n--\n$"
+                data-separator-notes="^Note:"
+                data-charset="utf-8">
+            </section>
+        </div>
+    </div>
+
+    <!-- Core Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/zoom/zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+    <!-- Configuration -->
+    <script src="./assets/js/config.js"></script>
+    
+    <!-- Start the presentation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeReveal();
+        });
+    </script>
+</body>
+</html>

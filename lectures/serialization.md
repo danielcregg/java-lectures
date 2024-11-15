@@ -1,25 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Java Lecture - Serialization</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Reveal.js Core -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/night.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="../assets/css/slides.css">
-</head>
-
-<body>
-    <div class="reveal">
-        <div class="slides">
-            <section data-markdown data-separator="^\n---\n$" data-separator-notes="^Note:">
-                <textarea data-template>
 <!-- .slide: data-background-gradient="linear-gradient(to bottom, #002366, #000000)" -->
 # <span class="custom-title">Java Serialization</span>
 
@@ -65,6 +43,7 @@ graph LR
     B --> D[Database Storage]
     B --> E[Memory Storage]
     B --> F[Network Transfer]
+    
     style A fill:#4CAF50
     style B fill:#2196F3
     style C fill:#FFC107
@@ -83,7 +62,7 @@ The reverse process where bytes are converted back into objects
 
 </div>
 
-```mermaid
+<div class="mermaid fragment fade-up">
 graph LR
     A[File] -->|Read| B[Stream of Bytes]
     C[Database] -->|Read| B
@@ -95,8 +74,7 @@ graph LR
     style C fill:#F44336
     style D fill:#9C27B0
     style E fill:#4CAF50
-```
-<!-- .element: class="fragment fade-up" -->
+</div>
 
 Also known as **unmarshalling**
 <!-- .element: class="fragment fade-up" -->
@@ -254,102 +232,52 @@ public class Employee {
 
 ---
 
-<!-- .slide: data-background-gradient="linear-gradient(to bottom, #002366, #000000)" -->
+## Important Considerations
+
+<div class="warning-box">
+
+* Only Serializable objects can be persisted <!-- .element: class="fragment fade-up" -->
+* Parent class implementation passes to child classes <!-- .element: class="fragment fade-up" -->
+* Static members are not serialized <!-- .element: class="fragment fade-up" -->
+* Transient members are not serialized <!-- .element: class="fragment fade-up" -->
+* Constructor is NOT called during deserialization <!-- .element: class="fragment fade-up" -->
+* All object's member classes must be Serializable <!-- .element: class="fragment fade-up" -->
+
+</div>
+
+---
+
 ## Benefits of Serialization
 
 <div class="process-box">
-<ul>
-    <li class="fragment fade-up">Persist object state</li>
-    <li class="fragment fade-up">Transfer objects across network</li>
-    <li class="fragment fade-up">Platform independent</li>
-    <li class="fragment fade-up">Deep copy of objects</li>
-    <li class="fragment fade-up">Session management in web applications</li>
-</ul>
+
+* Persist object state <!-- .element: class="fragment fade-up" -->
+* Transfer objects across network <!-- .element: class="fragment fade-up" -->
+* Platform independent <!-- .element: class="fragment fade-up" -->
+* Deep copy of objects <!-- .element: class="fragment fade-up" -->
+* Session management in web applications <!-- .element: class="fragment fade-up" -->
+
 </div>
 
 ---
-
 <!-- .slide: data-background-gradient="linear-gradient(to bottom, #000000, #002366)" -->
+
 ## Additional Resources
 
-<div class="resource-links">
-<ul>
-    <li class="fragment fade-up"><a href="https://www.oracle.com/technical-resources/articles/java/serializationapi.html">Oracle Java Serialization Guide</a></li>
-    <li class="fragment fade-up"><a href="https://www.geeksforgeeks.org/serialization-in-java/">GeeksForGeeks Tutorial</a></li>
-    <li class="fragment fade-up"><a href="https://www.tutorialspoint.com/java/java_serialization.htm">TutorialsPoint Reference</a></li>
-</ul>
+<div class="process-box">
+
+* [Oracle Java Serialization Guide](https://www.oracle.com/technical-resources/articles/java/serializationapi.html)
+* [GeeksForGeeks Tutorial](https://www.geeksforgeeks.org/serialization-in-java/)
+* [TutorialsPoint Reference](https://www.tutorialspoint.com/java/java_serialization.htm)
+
 </div>
 
 ---
-
 <!-- .slide: data-background-gradient="linear-gradient(to bottom, #002366, #000000)" -->
+
 ## Questions?
 
 <div class="fragment fade-up">
     <p>Thank you for your attention!</p>
     <medium>Feel free to ask any questions about Java Serialization</medium>
 </div>
-
-                </textarea>
-            </section>
-        </div>
-    </div>
-
-    <!-- Core Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/zoom/zoom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-
-    <script>
-        // Configure Mermaid with proper settings
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: 'dark',
-            securityLevel: 'loose',
-            flowchart: {
-                htmlLabels: false,
-                useMaxWidth: true
-            }
-        });
-
-        // Initialize Reveal.js with proper configuration
-        Reveal.initialize({
-            hash: true,
-            slideNumber: true,
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
-            markdown: {
-                smartypants: true
-            },
-            // Add touch options to fix warnings
-            touch: {
-                swipeSensitivity: 30,
-                dragMinThreshold: 20,
-                passive: true
-            }
-        });
-
-        // Process Mermaid diagrams after all content is loaded
-        Reveal.addEventListener('ready', function(event) {
-            // Wait for slide content to be fully rendered
-            setTimeout(() => {
-                document.querySelectorAll('.mermaid').forEach(async function(diagram) {
-                    try {
-                        // Clean up any existing HTML tags in the diagram text
-                        const cleanText = diagram.textContent.replace(/<[^>]*>/g, '');
-                        diagram.textContent = cleanText;
-                        await mermaid.init(undefined, diagram);
-                    } catch (e) {
-                        console.warn('Mermaid initialization error:', e);
-                        // Add fallback display
-                        diagram.innerHTML = `<pre class="error">Diagram rendering failed: ${e.message}</pre>`;
-                    }
-                });
-            }, 1000);
-        });
-    </script>
-</body>
-
-</html>

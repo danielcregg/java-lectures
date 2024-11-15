@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-        // Get the path without the leading slash
-        const path = window.location.pathname.replace('/java-lectures/', '').replace('/', '');
+        // Get just the final part of the path
+        const pathParts = window.location.pathname.split('/');
+        const path = pathParts[pathParts.length - 1];
         
-        if (path) {
+        if (path && path !== 'ooc2-lectures') {
             // Redirect to the lecture viewer with the correct lecture parameter
-            window.location.href = '/java-lectures/viewer.html?lecture=' + path;
+            window.location.href = '/viewer.html?lecture=' + path;
         } else {
             // If no path, go to home page
-            window.location.href = '/java-lectures/';
+            window.location.href = '/';
         }
     </script>
 </head>
