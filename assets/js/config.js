@@ -18,7 +18,7 @@ function initializeReveal() {
         controls: true,
         progress: true,
         center: true,
-        slideNumber: 'c/t',
+        slideNumber: true,
         
         // Features
         overview: true,
@@ -38,7 +38,7 @@ function initializeReveal() {
         },
         
         // Plugins
-        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
 
         // Customize keybindings
         keyboard: {
