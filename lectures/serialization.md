@@ -3,7 +3,7 @@
 
 A Complete Guide to Object Serialization
 
-<small>Understanding the Process of Converting Objects to Bytes</small>
+<medium>Understanding the Process of Converting Objects to Bytes</medium>
 <!-- .element: class="fragment fade-up" -->
 
 ---
@@ -24,11 +24,12 @@ Java serialization is a mechanism for converting an object into a series of byte
 
 <div class="process-box fragment fade-up">
 
-These bytes can be:
-* Stored in a file
-* Stored in a database
-* Stored in memory
-* Transmitted across a network
+These bytes can be:  
+
+* Stored in a file <!-- .element: class="fragment fade-up" -->
+* Stored in a database <!-- .element: class="fragment fade-up" -->
+* Stored in memory <!-- .element: class="fragment fade-up" -->
+* Transmitted across a network <!-- .element: class="fragment fade-up" -->
 
 </div>
 
@@ -37,19 +38,19 @@ These bytes can be:
 ## Serialization Process
 
 <div class="mermaid">
-graph LR
-    A[Java Object] -->|Serializer| B[Stream of Bytes]
-    B --> C[File Storage]
-    B --> D[Database Storage]
-    B --> E[Memory Storage]
-    B --> F[Network Transfer]
-    
-    style A fill:#4CAF50
-    style B fill:#2196F3
-    style C fill:#FFC107
-    style D fill:#F44336
-    style E fill:#9C27B0
-    style F fill:#00BCD4
+graph TB
+    A[Java Object]-->|Serializer|B[Bytes]
+    B-->C[File]
+    B-->D[Database]
+    B-->E[Memory]
+    B-->F[Network]
+    classDef default fill:#1a1a1a,stroke:#666
+    classDef object fill:#4CAF50,stroke:#666,color:white
+    classDef bytes fill:#2196F3,stroke:#666,color:white
+    classDef storage fill:#FFC107,stroke:#666,color:#000
+    class A object
+    class B bytes
+    class C,D,E,F storage
 </div>
 
 ---
@@ -62,18 +63,19 @@ The reverse process where bytes are converted back into objects
 
 </div>
 
-<div class="mermaid fragment fade-up">
-graph LR
-    A[File] -->|Read| B[Stream of Bytes]
-    C[Database] -->|Read| B
-    D[Memory] -->|Read| B
-    B -->|Deserializer| E[Java Object]
-    
-    style A fill:#FFC107
-    style B fill:#2196F3
-    style C fill:#F44336
-    style D fill:#9C27B0
-    style E fill:#4CAF50
+<div class="mermaid">
+graph TB
+    A[File]-->|Read|B[Bytes]
+    C[Database]-->|Read|B
+    D[Memory]-->|Read|B
+    B-->|Deserializer|E[Java Object]
+    classDef default fill:#1a1a1a,stroke:#666
+    classDef object fill:#4CAF50,stroke:#666,color:white
+    classDef bytes fill:#2196F3,stroke:#666,color:white
+    classDef storage fill:#FFC107,stroke:#666,color:#000
+    class A,C,D storage
+    class B bytes
+    class E object
 </div>
 
 Also known as **unmarshalling**

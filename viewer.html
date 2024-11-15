@@ -13,6 +13,9 @@
     <!-- Syntax Highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
     
+    <!-- Load Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    
     <!-- Custom Styles -->
     <link rel="stylesheet" href="./assets/css/slides.css">
 </head>
@@ -24,7 +27,7 @@
     <div class="reveal">
         <div class="slides">
             <section 
-                data-markdown="lectures/serialization.md"
+                data-markdown=""
                 data-separator="^\n---\n$"
                 data-separator-vertical="^\n--\n$"
                 data-separator-notes="^Note:"
@@ -39,7 +42,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/zoom/zoom.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+    <!-- Initialize Presentation -->
+    <script>
+        // Get lecture name and set the markdown source
+        const urlParams = new URLSearchParams(window.location.search);
+        const lecture = urlParams.get('lecture') || 'index';
+        document.querySelector('section[data-markdown]')
+            .setAttribute('data-markdown', `./lectures/${lecture}.md`);
+    </script>
 
     <!-- Configuration -->
     <script src="./assets/js/config.js"></script>
