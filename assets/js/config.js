@@ -25,7 +25,7 @@ function initializeReveal() {
         
         // Navigation
         hash: true,
-        mouseWheel: false,
+        mouseWheel: false,  // Disable default mouseWheel behavior
         transition: 'slide',
         transitionSpeed: 'fast',
         
@@ -37,35 +37,24 @@ function initializeReveal() {
         
         // Features
         overview: true,
-        touch: {
-            enabled: true,
-            addKeyboardHandler: false,
-        },
         keyboard: true,
         
-        // Custom touch settings
-        gestureHandling: {
-            passive: true,
-            handlers: {
-                touchstart: { passive: true },
-                touchmove: { passive: true },
-                touchend: { passive: true }
-            }
+        // Zoom Configuration
+        zoom: {
+            mouseWheel: true,  // Enable zoom via mouseWheel
+            toggle: true,      // Enable zoom toggle
+            scale: 2,         // Zoom scale factor
+            pan: true,        // Enable panning while zoomed
+            ctrlKey: true,    // Require ctrl key for zoom
+            pauseOnZoom: true // Pause transitions while zoomed
         },
-        fragments: true,
-        fragmentInURL: true,
 
-        // Markdown config
-        markdown: {
-            smartypants: true
-        },
-        
-        // Plugins
+        // Plugins with zoom enabled
         plugins: [ 
             RevealMarkdown,
             RevealHighlight,
             RevealNotes,
-            RevealZoom,
+            RevealZoom,  // Make sure zoom plugin is included
             mermaidPlugin
         ]
     });
