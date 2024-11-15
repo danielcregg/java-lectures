@@ -69,6 +69,20 @@ graph LR
     style D fill:#F44336
     style E fill:#9C27B0
     style F fill:#00BCD4
+``` <!-- End of Mermaid code block -->
+graph LR
+    A[Java Object] -->|Serializer| B[Stream of Bytes]
+    B --> C[File Storage]
+    B --> D[Database Storage]
+    B --> E[Memory Storage]
+    B --> F[Network Transfer]
+    
+    style A fill:#4CAF50
+    style B fill:#2196F3
+    style C fill:#FFC107
+    style D fill:#F44336
+    style E fill:#9C27B0
+    style F fill:#00BCD4
 ```
 
 ---
@@ -320,8 +334,26 @@ Thank you for your attention!
     <!-- Mermaid -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js"></script>
     
+    <!-- Include the Mermaid plugin -->
+    <script src="https://unpkg.com/reveal.js@4.3.1/plugin/mermaid/mermaid.js"></script>
+    
     <!-- Custom Scripts -->
     <script src="../assets/js/config.js"></script>
     <script src="../assets/js/loader.js"></script>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom, RevealMermaid ],
+            mermaid: {
+                startOnLoad: true,
+                theme: 'dark',
+            },
+            markdown: {
+                smartypants: true
+            }
+        });
+    </script>
 </body>
 </html>

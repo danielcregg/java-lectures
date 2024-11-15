@@ -69,8 +69,8 @@
 .reveal pre code {
     padding: 20px;
     max-height: 450px;
-    font-size: 0.8em;
-    line-height: 1.5;
+    font-size: 2.0em; /* Adjust the value as needed */
+    line-height: 1.3;
     font-family: 'Fira Code', 'Consolas', monospace;
 }
 
