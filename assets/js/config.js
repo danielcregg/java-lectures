@@ -51,21 +51,23 @@ function initializeReveal() {
         },
     });
 
-    // Initialize Mermaid
-    mermaid.initialize({
-        startOnLoad: true,
-        theme: 'dark',
-        securityLevel: 'loose',
-        themeCSS: '.node rect { fill: #1a1a1a; }',
-        flowchart: {
-            curve: 'basis',
-            padding: 20
-        }
-    });
-    
-    // Add event listeners for special features
-    Reveal.addEventListener('ready', event => {
-        // Auto-render all Mermaid diagrams
-        mermaid.init(undefined, '.mermaid');
-    });
+    // Only initialize Mermaid if it's available
+    if (typeof mermaid !== 'undefined') {
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            themeCSS: '.node rect { fill: #1a1a1a; }',
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            }
+        });
+
+        // Add event listeners for special features
+        Reveal.addEventListener('ready', event => {
+            // Auto-render all Mermaid diagrams
+            mermaid.init(undefined, '.mermaid');
+        });
+    }
 }

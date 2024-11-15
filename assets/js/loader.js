@@ -1,6 +1,6 @@
 // Get the current lecture name from the URL
 const lectureName = window.location.pathname.split('/').pop().replace('.html', '');
-const slidesPath = `../lectures/${lectureName}.html`; // Removed -slides suffix
+const slidesPath = `../lectures/${lectureName}.html`;
 
 // Load the slides content
 fetch(slidesPath)
@@ -12,7 +12,11 @@ fetch(slidesPath)
     })
     .then(html => {
         document.getElementById('slides').innerHTML = html;
-        initializeReveal();
+        try {
+            initializeReveal();
+        } catch (e) {
+            console.error('Error initializing Reveal:', e);
+        }
     })
     .catch(error => {
         console.error('Error loading slides:', error);
