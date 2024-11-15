@@ -1,6 +1,6 @@
 // Get the current lecture name from the URL
 const lectureName = window.location.pathname.split('/').pop().replace('.html', '');
-const slidesPath = `../lectures/content/${lectureName}-slides.html`;
+const slidesPath = `../lectures/${lectureName}-slides.html`;
 
 // Load the slides content
 fetch(slidesPath)
